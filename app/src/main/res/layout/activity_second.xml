@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_alignParentBottom="true"
+android:padding="16dp"
+tools:context=".SecondActivity">
+
+<!-- Cabeçalho -->
+<TextView
+    android:id="@+id/headerTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:text="Ta Quente Aqui"
+    android:textSize="24sp"
+    android:textStyle="bold"
+    android:layout_marginBottom="16dp" />
+
+<!-- Mapa -->
+<com.google.android.gms.maps.MapView
+    android:id="@+id/mapView"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:layout_below="@id/headerTextView"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="8dp"
+    android:apiKey="AIzaSyDX_ndH9EqX2yj1tw3N9VYlws06LQkiCYo" />
+
+<!-- Imagem -->
+<ImageView
+    android:id="@+id/imageView"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_below="@id/mapView"
+    android:layout_marginBottom="16dp"
+    android:contentDescription="Preview da imagem" />
+
+<!-- Descrição -->
+<EditText
+    android:id="@+id/edtDescription"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/imageView"
+    android:hint="Descrição da denúncia"
+    android:layout_marginBottom="16dp" />
+
+<!-- Botão Capturar Foto -->
+<Button
+    android:id="@+id/btnCapture"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/edtDescription"
+    android:text="Capturar Foto"
+    android:layout_marginBottom="8dp" />
+
+<!-- Botão Enviar Denúncia -->
+<Button
+    android:id="@+id/btnSend"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/btnCapture"
+    android:text="Enviar Denúncia"
+    android:layout_marginBottom="16dp" />
+
+<!-- Contêiner de Mensagens -->
+<LinearLayout
+    android:id="@+id/linear_layout_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/btnSend"
+    android:layout_marginTop="30dp"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:clickable="true" />
+
+</RelativeLayout>
+
+
