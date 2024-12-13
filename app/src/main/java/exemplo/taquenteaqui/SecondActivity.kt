@@ -123,12 +123,34 @@ class SecondActivity : AppCompatActivity(), LocationManager.LocationCallback, On
         }
     }
 
+    data class ReportData(
+        val image: ByteArray,
+        val description: String,
+        val dateTime: String,
+        val username: String?
+    )
+
+
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
         mapViewInitialized = true
 
 
         Log.d("MapReady", "Mapa está pronto - sendo chamado")
+
+        googleMap.setOnMarkerClickListener { marker ->
+            val data = marker.tag as? ReportData
+            data?.let {
+                val intent = Intent(this, DetailActivity::class.java)
+                intent.putExtra("image", it.image)
+                intent.putExtra("description", it.description)
+                intent.putExtra("dateTime", it.dateTime)
+                intent.putExtra("username", it.username)
+                startActivity(intent)
+            }
+            true
+        }
+
 
 
         // Verificar se a permissão de localização está concedida
@@ -178,6 +200,13 @@ class SecondActivity : AppCompatActivity(), LocationManager.LocationCallback, On
             val imageBytes = byteArrayOutputStream.toByteArray()
 
             val dataHora = obterDataHoraAtual()
+
+            val markerOptions = MarkerOptions()
+                .position(LatLng(AppGlobals.minha_latitude, AppGlobals.minha_longitude))
+                .title("Denúncia")
+            val marker = googleMap.addMarker(markerOptions)
+            marker?.tag = ReportData(imageBytes, description, dataHora, AppGlobals.userName)
+
 
             // Publica a imagem e descrição
             AppGlobals.mqttManager?.publish(

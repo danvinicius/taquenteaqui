@@ -2,6 +2,7 @@ package exemplo.taquenteaqui
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.util.Base64
@@ -57,19 +58,32 @@ class MqttManager(context: Context) {
                         val latitude = json.getDouble("latitude")
                         val longitude = json.getDouble("longitude")
                         val description = json.getString("description")
+                        val imageBase64 = json.getString("image")
+                        val dateTime = json.getString("dataHora")
+                        val username = json.getString("userName")
 
                         // Atualiza o mapa
                         SecondActivity.instance?.updateMapLocation(latitude, longitude)
 
-                        val toastMsg = "Nova denúncia: $description em ($latitude, $longitude)"
-                        Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(context, toastMsg, Toast.LENGTH_LONG).show()
+                        // Decodifica a imagem
+                        val imageBytes = Base64.decode(imageBase64, Base64.DEFAULT)
+
+                        // Abre a DetailActivity
+                        val intent = Intent(context, DetailActivity::class.java).apply {
+                            putExtra("image", imageBytes)
+                            putExtra("description", description)
+                            putExtra("dateTime", dateTime)
+                            putExtra("username", username)
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         }
+                        context.startActivity(intent)
+
                     } catch (e: JSONException) {
                         Log.e(TAG, "Erro ao processar a mensagem MQTT", e)
                     }
                 }
             }
+
 
 
             override fun connectionLost(cause: Throwable?) {

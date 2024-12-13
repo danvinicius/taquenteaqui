@@ -18,14 +18,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Texto de boas-vindas -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:text="Bem-vindo ao TaQuenteAqui!"
-        android:textSize="18sp" />
-
     <!-- Descrição do aplicativo -->
     <TextView
         android:layout_width="match_parent"
