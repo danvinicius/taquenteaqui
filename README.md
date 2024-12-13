@@ -1,81 +1,67 @@
 # Ta Quente Aqui - Projeto para disciplina de Sistemas Distribuídos
 
-O Ta Quente Aqui é um projeto dedicado a aprimorar a segurança dos skatistas, especialmente aqueles envolvidos em modalidades de corrida. O sistema inclui uma aplicação móvel desenvolvida em Kotlin e um sistema distribuído que permite aos skatistas alertarem uns aos outros em tempo real quando caem, compartilhando suas coordenadas exatas de queda.
+## Descrição
 
+O Ta Quente Aqui é uma aplicação desenvolvida em Kotlin para a denúncia de incêndios. Os usuários podem registrar suas denúncias incluindo uma descrição, uma foto e sua geolocalização automaticamente capturada pelo dispositivo. Outros usuários podem visualizar as denúncias em um mapa interativo.
 
+<br>
 
-# Como executar o programa:
+## Funcionalidades
 
-1- Clone o repositório:
- "Clone a Repository" e inserir a URL do repositório Git.
+- Cadastro de Denúncias:
 
-2- Abra o projeto no Android Studio:
-E no menu inicial, clique em abir um projeto existente: "Open an existing Android Studio project"
-Navegue ali na esquerda do programa, no diretório onde você clonou o repositório
-**e selecione o arquivo build.gradle dentro da pasta do projeto**.
-Isso é geralmente encontrado no nível do diretório do projeto.
+  - Descrição detalhada do incidente
 
-3- Configure as dependências:
-O Android Studio provavelmente baixará automaticamente as dependências do projeto assim que você abrir. **Se isso não acontecer, você pode clicar em "Sync Now" (Sincronizar agora) na barra superior** para forçar a sincronização (https://stackoverflow.com/questions/29565263/android-studio-how-to-run-gradle-sync-manually).
+  - Upload de uma foto ilustrativa
 
-4- Execute o aplicativo:
-Depois que as dependências estiverem configuradas, você deve ser capaz de executar o aplicativo. Clique no botão "Run" (Executar) na barra superior e escolha o dispositivo emulado ou conectado para executar o aplicativo.
+  - Geolocalização automática usando GPS
 
+- Visualização de Denúncias:
 
+  - Mapa interativo exibindo a localização das denúncias
 
-## Componentes Principais
+  - Detalhes completos ao clicar nos marcadores do mapa
+  
+<br>
 
-### Aplicação Móvel (Android)
+## Tecnologias Utilizadas
 
-- **Desenvolvimento em Kotlin:** A aplicação móvel é desenvolvida em Kotlin, proporcionando uma experiência moderna e eficiente para os skatistas.
+- Linguagem: Kotlin
 
-- **Monitoramento da Aceleração com Biblioteca Nativa do Android:** Utiliza a biblioteca nativa do Android para obter aceleração e monitorar a atividade do dispositivo. A detecção de quedas é realizada através da integração direta com as funcionalidades do sistema operacional, proporcionando uma análise mais eficiente e precisa.
+- Plataforma: Android
 
-- **Integração com Geolocalização:** Integra a API de geolocalização, como a Google Maps API, para obter coordenadas precisas do local da queda.
+- Serviços Utilizados:
 
-### Protocolo de Comunicação
+- Google Maps API: para exibição das denúncias no mapa
 
-- **MQTT (Message Queuing Telemetry Transport):** Estabelece um protocolo de comunicação entre dispositivos para alertas de queda, confirmações e atualizações de localização.
+- HiveMQ: para publicação e subscrição das mensagens entre os usuários
+  
+<br>
 
-### Fornecedor de Broker MQTT
+## Como Funciona
 
-- **HiveMQ:** Utiliza um fornecedor de broker MQTT, como HiveMQ, para facilitar a comunicação assíncrona entre os dispositivos dos skatistas, garantindo a entrega confiável de mensagens e a sincronização eficiente entre os participantes.
+O usuário registra uma denúncia preenchendo uma descrição e anexando uma foto. A localização geográfica é obtida automaticamente usando a API de localização do dispositivo.
+As informações são enviadas ao servidor usando o HiveMQ. Outros usuários recebem as denúncias em tempo real e podem visualizá-las no mapa.
 
-### Temporização
+<br>
 
-- **Mecanismo de Temporização:** Implementa um mecanismo de temporização no lado do cliente para determinar se o skatista está imóvel por um período suficientemente longo para indicar uma queda, evitando alertas falsos por movimentos temporários ou quedas leves.
+## Como Configurar e Executar
 
-### API de Geolocalização
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/danvinicius/taquenteaqui.git
+   ```
+2. Abra o projeto no Android Studio.
+3. Configure a API do Google Maps e o servidor HiveMQ nas chaves apropriadas.
+4. Compile e execute o aplicativo em um dispositivo Android ou emulador.
+   
+<br>
 
-- **Integração com Google Maps API:** Utiliza a Google Maps API para obter informações precisas sobre a localização do skatista. A localização é compartilhada apenas durante uma queda, notificando outros skatistas próximos.
+## Contribuição
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests no repositório do projeto.
 
-### Interface do Usuário
+<br>
 
-- **Interface Intuitiva:** Desenvolve uma interface intuitiva e amigável para a aplicação móvel.
+## Licença
+Este projeto é licenciado sob a MIT License.
 
-- **Notificações Visuais:** Exibe notificações visuais quando um skatista cai, utilizando mapas para representar graficamente a localização do skatista caído.
-
-### Sistema de Notificação
-
-- **Firebase Cloud Messaging (FCM):** Implementa o FCM para enviar notificações push, oferecendo opções de aceitar ou rejeitar o alerta e promovendo a interação entre a comunidade de skatistas.
-
-## Configuração do Projeto
-
-### Configuração do Ambiente
-
-- Certifique-se de ter o Android Studio instalado.
-- Instale o plugin Kotlin no Android Studio.
-
-### Configuração do Projeto
-
-- Abra o projeto no Android Studio.
-- Verifique se as dependências do Kotlin estão configuradas corretamente no arquivo `build.gradle`.
-
-### Execução do Projeto
-
-- Configure a classe principal para a execução, geralmente aquela que contém a função `main`.
-- Execute o projeto e verifique a saída no console.
-
-## Contribuições
-
-Contribuições são bem-vindas! Sinta-se à vontade para relatar problemas, sugerir melhorias ou contribuir diretamente para o projeto.
